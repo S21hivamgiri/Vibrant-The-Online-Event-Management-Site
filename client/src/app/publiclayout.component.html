@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="navbar-brand  dropdown text-white">
+    <a class="nav-link my-2 my-sm-0 btn-outline-primary btn" id="navbarDropdown1" role="button" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false"> <span class="spinner-grow text-light my-2" role="status"
+        style="width: 1rem; height: 1rem;">
+      </span><i class="fa fa-microphone" aria-hidden="true"></i> <span class="h3">Vibrant</span><br />
+      <small>World of Opportunities</small>
+    </a>
+
+    <div class="dropdown-menu bg-dark border-top border-bottom border-primary" aria-labelledby="navbarDropdown1">
+      <a class="dropdown-item  text-light" [routerLink]="['/feedback']"><i class="fa fa-address-book"
+          aria-hidden="true"></i> App FeedBack</a>
+      <a class="dropdown-item  text-light" routerLink="['/mobile']"> <i class="fa fa-mobile"
+          aria-hidden="true">&nbsp;&nbsp;</i> Mobile App</a>
+      <a class="dropdown-item  text-light" [routerLink]="['/gallery']"> <i class="fa fa-picture-o"
+          aria-hidden="true"></i> Gallery</a>
+      <div class="border border-primary"></div>
+      <a class="dropdown-item  text-light" [routerLink]="['/contact']"> <i class="fa fa-headphones"
+          aria-hidden="true"></i> Customer Care</a>
+    </div>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" [routerLink]="['/']"> <i class="fa fa-home" aria-hidden="true"></i> Home
+          <br /><small>Go to Home Page</small> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/event']"> <i class="fa fa-envira" aria-hidden="true"></i> Event
+          <br /><small>Get Event Details</small><span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>
+          User
+          <br /><small>Login/SignUp</small>
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/login']"> <i class="fa fa-sign-in"
+              aria-hidden="true"></i> Login</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/signup']"> <i class="fa fa-user-plus"
+              aria-hidden="true"></i> SignUp</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn btn-outline-primary" href="#" [routerLink]="['/datetrack']" tabindex="-1"
+          aria-disabled="true">Date Track <span class="badge badge-danger blinking rounded">
+
+            New!!</span><br /><small>The Calender View</small></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/sponsor']"> <i class="fa fa-money" aria-hidden="true"></i>
+          Sponsors
+          <br /><small>Get Sponsor Details</small><span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/offer']"> <i class="fa fa-foursquare" aria-hidden="true"></i>
+          Offers
+          <br /><small>Get Offer Details</small><span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+        Search</button>
+    </form>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

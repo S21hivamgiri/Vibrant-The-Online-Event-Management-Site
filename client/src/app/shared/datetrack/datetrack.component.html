@@ -1,0 +1,9 @@
+<div class='container'>
+  <div class=' jumbotron py-0'>
+    <div class='app-top'>
+      <div class='app-calendar' *ngIf="calendarVisible">
+        <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-1 col-lg-2 col-xl-2 col-sm-0"></div>
+    <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-sm-12">
+      <div class="alert alert-warning border border-warning p-5">
+        <h1 class="display-3 font-weight-bolder text-uppercase">{{user.name}}</h1>
+        <hr class="my-2" />
+        <div class="lead">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="h4">Email:</div>
+                </td>
+                <td>
+                  <a href="mailto:{{user.email}}">
+                    <span class="m-4 font-weight-bold alert alert-primary">
+                      <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                      {{user.email}}
+                    </span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="h4">Contact:</div>
+                </td>
+                <td><a href="tel:{{user.code + user.contact}}">
+                    <span class="m-4 font-weight-bold alert alert-primary">
+                      <i class="fa fa-phone" aria-hidden="true"></i>
+                      {{user.code}}-{{user.contact}}
+                    </span>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="h4">Address:</div>
+                </td>
+                <td>{{user.address}}</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="h4">Country:</div>
+                </td>
+                <td>{{user.country}}</td>
+              </tr>
+              <tr>
+                <td colspan="2"><i class="fa fa-check-square-o" aria-hidden="true"></i> View <a href=''>Terms and
+                    Conditions</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button class='btn btn-danger m-3 ' (click)='logOut()'><i class="fa fa-sign-out" aria-hidden="true"></i>
+          LOGOUT</button>
+      </div>
+    </div>
+    <div class="col-12 col-md-1 col-lg-2 col-xl-2 col-sm-0"></div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class=" alert alert-primary" *ngIf="professional">
+  <h1 class="display-3 text-center font-weight-bolder py-5">{{professional.title}}</h1>
+
+  <div class="my-2 border-bottom border-primary text-primary text-right">A conference organoised by Vibrant on
+    {{professional.type}}
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-center ">
+      <ul class="list-group mb-5 py-5">
+        <div
+          *ngIf="eventService.GetStatus(professional.cancel, professional.regisDate,professional.regisCloseDate,professional.start, professional.end)| async as status">
+          <div *ngIf='status[0]' [class]="'font-weight-bold alert alert-'+status[1]+' border border-'+status[1]">
+            <span *ngIf='status[0]==="Posted and Tentative"'>
+              {{status[0]}}<br>
+              <i class="fa fa-ticket" aria-hidden="true"></i> Purchase ticket After<br>
+              {{professional.regisDate | date:'dd:MM:yyyy HH:mm'}}
+            </span>
+            <span *ngIf='status[0]==="Registration Started"'>
+              {{status[0]}}<br>
+              <i class="fa fa-ticket" aria-hidden="true"></i> Purchase ticket before<br>
+              {{professional.regisCloseDate| date:'dd:MM:yyyy HH:mm ZZZZ' }}
+            </span>
+            <span *ngIf='status[0]==="Registration Closed"'>
+              <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+              {{status[0]}}
+            </span>
+          </div>
+        </div>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0 ">Start Time: <span
+            class="h5">
+            {{professional.start | date:'dd:MM:yyyy HH:mm ZZZZ'}}</span> </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0 ">Ends Time: <span
+            class="h5">
+            {{professional.end | date:'dd:MM:yyyy HH:mm ZZZZ'}}</span>
+        </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0">Venue: <span class="h5">
+            {{professional.venue}}</span>
+        </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0">Free Lunch and Snacks
+        </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0">3 hrs interaction with
+          Speaker
+        </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0">
+          $ {{professional.price}}
+        </li>
+      </ul>
+      <div class=" font-weight-bold border-top border-bottom border-primary">
+        <div class="my-2 h5"> {{professional.description}}</div>
+      </div>
+    </div>
+    <div class="alert alert-primary" *ngIf="professional.speakers.length">Speaker List</div>
+    <ul class="list-group" *ngIf="professional.speakers.length">
+      <li class="list-group-item" *ngFor="let hero of professional.speakers">{{hero.name}}</li>
+
+    </ul>
+    <div class="alert alert-primary" *ngIf="professional.sponsors.length">Sponsor List</div>
+    <ul class="list-group" *ngIf="professional.sponsors.length">
+      <li class="list-group-item" *ngFor="let hero of professional.sponsors">{{hero.name}}</li>
+
+    </ul>
+  </div>

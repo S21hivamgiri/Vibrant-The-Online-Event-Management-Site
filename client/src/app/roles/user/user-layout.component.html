@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-0">
+  <div class="navbar-brand  dropdown text-white">
+    <a class="nav-link my-2 my-sm-0 btn-outline-primary btn display-block" id="navbarDropdown1" role="button"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="spinner-grow text-light my-2"
+        role="status" style="width: 1rem; height: 1rem;">
+      </span><i class="fa fa-microphone" aria-hidden="true"></i> <span class="h3">Vibrant</span>
+      <br>
+      <small>World of Opportunities</small>
+    </a>
+    <div class="dropdown-menu bg-dark border-top border-bottom border-primary" aria-labelledby="navbarDropdown1">
+      <a class="dropdown-item  text-light" [routerLink]="['/user/feedback']"><i class="fa fa-address-book"
+          aria-hidden="true"></i> App FeedBack</a>
+      <a class="dropdown-item  text-light" [routerLink]="['/user/mobile']"> <i class="fa fa-mobile"
+          aria-hidden="true">&nbsp;&nbsp;</i> Mobile App</a>
+      <a class="dropdown-item  text-light" [routerLink]="['/user/gallery']"> <i class="fa fa-picture-o"
+          aria-hidden="true"></i> Gallery</a>
+      <div class="border border-primary"></div>
+      <a class="dropdown-item  text-light" [routerLink]="['/user/contact']"> <i class="fa fa-headphones"
+          aria-hidden="true"></i> Customer Care</a>
+    </div>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" [routerLink]="['/user']"> <i class="fa fa-home" aria-hidden="true"></i> Home
+          <br /><small>Go to Home Page</small> </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/user/event']"> <i class="fa fa-envira" aria-hidden="true"></i>
+          Event
+          <br /><small>Get Event Details</small></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn btn-outline-primary" href="#" [routerLink]="['/user/datetrack']" tabindex="-1"
+          aria-disabled="true">Date Track <span class="badge badge-danger blinking rounded">
+            New!!
+          </span>
+          <br /><small>The Calender View</small>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/user/sponsor']"> <i class="fa fa-money" aria-hidden="true"></i>
+          Sponsors
+          <br /><small>Get Sponsor Details</small>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/user/offer']"> <i class="fa fa-foursquare" aria-hidden="true"></i>
+          Offers
+          <br /><small>Get Offer Details</small></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>
+          Account
+          <br /><small>Profile and Cart</small>
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/user/purchase']">
+            <i class="fa fa-money" aria-hidden="true"></i> Purchase</a>
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/user/cart']"> <i class="fa fa-cart-plus"
+              aria-hidden="true"></i> Cart</a>
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/user/profile']"> <i class="fa fa-user"
+              aria-hidden="true"></i> Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-light" href="#" (click)="logOut()">
+            <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="hide" class=" row border-bottom border-primary">
+  <div class="text-center alert-primary col-12 col-md-6 col-sm-6 col-lg-6 col-xl-6">
+    <span class="h5 text-dark text-center">Welcome: <span class="text-primary">{{user.name}}</span></span>
+  </div>
+  <div class="text-right col-12 col-md-6 col-sm-6 col-lg-6 col-xl-6">
+    <span class="h5 text-dark text-center">Last Login:
+      <span class="text-primary">{{user.loginTime | date:'MM/dd/yyyy : HH-mm-ss'}}</span>
+    </span>
+  </div>
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

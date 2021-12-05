@@ -1,0 +1,29 @@
+::ng-deep .calendar-event-green {
+    background-color: green !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+::ng-deep .calendar-event-red {
+    background-color: red !important;
+    color: white;
+    cursor: pointer;
+}
+
+::ng-deep .calendar-event-blue {
+    background-color: blue !important;
+    color: white;
+    cursor: pointer;
+}
+
+::ng-deep .calendar-event-yellow {
+    background-color: yellow !important;
+    color: black;
+    cursor: pointer;
+}
+
+::ng-deep a:not([href]):not([tabindex]) {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}

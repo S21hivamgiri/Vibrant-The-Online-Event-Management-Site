@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="jumbotron py-0">
+    <div class="row" *ngIf="professional.length;else noData">
+      <div class="col-12 col-md-4 col-sm-4 col-lg-4 col-xl-4 my-4 py-3 " *ngFor="let item of professional">
+        <div class="card border-primary mb-3">
+          <div class="alert alert-primary font-weight-bold text-center">{{item.code}}</div>
+          <!-- <button (click)="deleteOffer(item._id);"><i class="fa fa-remove" aria-hidden="true"></i></button> -->
+          <div class="card-body text-primary">
+            <h5 class="card-title" style="text-transform: capitalize;">{{item.type}} : <span
+                *ngIf="(item.type === 'offprice') ">$ </span>{{item.value}}
+              <span *ngIf="(item.type === 'discount' )">%</span>
+            </h5>
+            <div class="text-center"><button class="btn btn-primary" (click)="copydata(item.code)">Copy Code</button>
+            </div>
+            <p class="card-text">{{item.description}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noData>No Offer to Show At the moment</ng-template>
+  </div>
+</div>

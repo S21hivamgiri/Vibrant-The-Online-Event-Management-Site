@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="navbar-brand  dropdown text-white">
+    <a class="nav-link my-2 my-sm-0 btn-outline-primary btn" id="navbarDropdown1" role="button" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      <span class="spinner-grow text-light my-2" role="status" style="width: 1rem; height: 1rem;">
+      </span>
+      <i class="fa fa-microphone" aria-hidden="true"></i>
+      <span class="h3">Vibrant</span><br>
+      <small>World of Opportunities</small>
+    </a>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" [routerLink]="['/admin']"> <i class="fa fa-home" aria-hidden="true"></i> Home
+          <br><small>Go to Home Page</small> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" href="#"> <i
+            class="fa fa-envira" aria-hidden="true"></i>
+          Event
+          <br><small>Get Event Details</small><span class="sr-only">(current)</span></a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown1">
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/admin/addevent']"><i class="fa fa-joomla"
+              aria-hidden="true"></i> Add Event</a>
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/admin/event']"><i class="fa fa-eye"
+              aria-hidden="true"></i> View Event</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" href="#"> <i
+            class="fa fa-microphone" aria-hidden="true"></i>
+          Speaker
+          <br><small>Get Speakers Details</small><span class="sr-only">(current)</span></a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown1">
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/admin/addspeaker']"><i class="fa fa-plus"
+              aria-hidden="true"></i> Add Speaker</a>
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/admin/speaker']"><i class="fa fa-eye"
+              aria-hidden="true"></i> View Speaker</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false" [routerLink]="['/admin/profile']"><i class="fa fa-user" aria-hidden="true"></i>
+          Profile
+          <br />
+          <small>View Admin Profile </small>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn btn-outline-primary" href="#" [routerLink]="['/admin/datetrack']" tabindex="-1"
+          aria-disabled="true">Date Track <span class="badge badge-danger blinking rounded">
+            New!!
+          </span><br>
+          <small>The Calender View</small>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"> <i
+            class="fa fa-money" aria-hidden="true"></i>
+          Sponsors
+          <br><small>Get Sponsor Details</small><span class="sr-only">(current)</span></a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown1">
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/admin/addsponsor']">
+            <i class="fa fa-plus" aria-hidden="true"></i> Add a Sponsor</a>
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/admin/sponsor']"><i class="fa fa-binoculars"
+              aria-hidden="true"></i> View Sponsors</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true"> <i
+            class="fa fa-foursquare" aria-hidden="true"></i>
+          Offers
+          <br><small>Get Offer Details</small><span class="sr-only">(current)</span></a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown1">
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/admin/addoffer']"> <i class="fa fa-diamond"
+              aria-hidden="true"></i> Add Offer</a>
+          <a class="dropdown-item text-light" href="#" [routerLink]="['/admin/offer']"> <i class="fa fa-align-justify"
+              aria-hidden="true"></i> View Offer
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

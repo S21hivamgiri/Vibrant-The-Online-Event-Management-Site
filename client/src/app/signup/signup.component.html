@@ -1,0 +1,219 @@
+<div class="container">
+  <div class="jumbotron my-0">
+    <div class="container">
+      <div class="row">
+        <div class="display-4  col-12 text-center">Welcome to <button class="my-2 my-sm-0 btn-outline-primary btn"
+            role="button" aria-haspopup="true" aria-expanded="false"> <span class="spinner-grow text-light my-2"
+              role="status" style="width: 1rem; height: 1rem;">
+            </span><i class="fa fa-microphone" aria-hidden="true"></i> <span class="h3">Vibrant</span>
+          </button>
+        </div>
+        <div class="col-12">
+          <br>
+          <div class="row">
+            <div class="col-12 col-md-3 col-sm-3 col-xl-3 col-lg-3 display-2 text-dark">
+            </div>
+            <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6 text-right border border-primary">
+              <div class="border-top border-primary "></div>
+              <div class="h2 col-12 my-4 text-center alert alert-primary"><i class="fa fa-pencil"
+                  aria-hidden="true"></i> Enter Your Data</div>
+              <form method action class="text-right" #form="ngForm" (ngSubmit)="SaveData(form)">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5"> <label>
+                          Full Name:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" id="name" ref='name' name="name" #name="ngModel" [(ngModel)]="user.name"
+                            class="form-control border border-primary rounded" placeholder="Enter Full name"
+                            minlength="3" required />
+                          <div class="text-danger" *ngIf="name.errors && (name.touched || form.submitted)">
+                            <span [hidden]="!name.errors.required">Please Enter Name</span>
+                            <span [hidden]="!name.errors.minlength">Name should be atleast 3 characters long</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <label>
+                          Email:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="email" #email="ngModel" [(ngModel)]="user.email" id="email" ref="email"
+                            name="email" class="form-control border border-primary rounded" placeholder="Enter Email Id"
+                            required
+                            pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+.[a-zA-Z0-9-]*" />
+                          <div class="text-danger" *ngIf="email.errors && (email.touched || form.submitted)">
+                            <span [hidden]="!email.errors.pattern">Please Enter Valid Email</span>
+                            <span [hidden]="!email.errors.required">Please Enter Email</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5"> <label>
+                          Password:
+                          <div class="text-danger text-left h6"></div>
+                        </label></td>
+                      <td>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-12 col-md-2 col-lg-2 col-xl-2 pr-0 col-sm-2">
+                              <button (click)="pass()" class="form-control border border-primary btn">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </button>
+                            </div>
+                            <div class="col-12 col-md-10 col-lg-10 col-xl-10 pl-0 col-sm-10">
+                              <input type={{passtype}} #password="ngModel" [(ngModel)]="user.password" id="password"
+                                ref="password" name="password" class="form-control border border-primary rounded"
+                                placeholder="Enter Your Password" required />
+                              <div class="text-danger" *ngIf="password.errors && (password.touched || form.submitted)">
+                                <span [hidden]="!password.errors.required">Please Enter Password</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5"> <label>
+                          Confirm Password:
+                          <div class="text-danger text-left h6"></div>
+                        </label></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="password" name="confirmPassword" #confirmPassword="ngModel"
+                            [(ngModel)]="user.confirmPassword" id="cpassword" ref="cpassword" name="cpassword"
+                            class="form-control border border-primary rounded" placeholder="Confirm Your Password" />
+                          <div class="text-danger"
+                            *ngIf="confirmPassword.errors && (confirmPassword.touched || form.submitted)">
+                            <span [hidden]="!confirmPassword.errors.required">Please confirm password
+                            </span>
+                          </div>
+                          <div class="text-danger" *ngIf="user.password != user.confirmPassword">
+                            <span>Passwords dont match </span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <label>Country:</label>
+                        <div class="text-danger text-left h6"></div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <select name="code" id="code" #code="ngModel" [(ngModel)]="user.code"
+                            class="form-control border border-primary rounded" required>
+                            <option country="" value="" selected>---Select Country---</option>
+                            <option country="India" value="+91"> India (+91)</option>
+                            <option country="UK" value="+44">UK (+44)</option>
+                            <option country="USA" value="+1">USA (+1)</option>
+                            <option country="Australia" value="+61">Australia (+61)</option>
+                            <option country="China" value="+86">China (+86)</option>
+                            <option country="France" value="+33">France (+33)</option>
+                            <option country="Japan" value="+81">Japan (+81)</option>
+                            <option country="UAE" value="+971">UAE (+971)</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <label>
+                          Contact No.:
+                          <div class="text-danger text-left h6">
+                          </div>
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <div class="row">
+                            <div class="col-12 col-md-3 col-lg-3 col-xl-3 pr-0 col-sm-3">
+                              <input type="text" placeholder="Code" ref="code" #code="ngModel" name="code"
+                                value={{user.code}} class="px-0 mx-0 form-control border border-primary rounded"
+                                [(ngModel)]="user.code" required />
+                            </div>
+                            <div class="col-12 col-md-9 pl-0 col-lg-9 col-xl-9 col-sm-9">
+                              <input type="number" name="contact" #contact="ngModel" [(ngModel)]="user.contact"
+                                class="px-0 mx-0 form-control border border-primary rounded" ref="contact" id="contact"
+                                name="contact" placeholder="Enter Phone" required />
+                              <div class="text-danger" *ngIf="contact.errors && (contact.touched || form.submitted)">
+                                <span [hidden]="!contact.errors.required">Please Enter Contact number</span>
+                              </div>
+                              <div class="text-danger" *ngIf="code.errors && (code.touched || form.submitted)">
+                                <span [hidden]="!code.errors.required">Please Enter Country Code number</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5"> <label>
+                          Address:
+                          <div class="text-danger text-left h6"></div>
+                        </label></td>
+                      <td>
+                        <div class="form-group"> <textarea rows={3} id="address" name="address" #address="ngModel"
+                            [(ngModel)]="user.address" class="form-control border border-primary rounded my-0"
+                            placeholder="Enter Address" required></textarea>
+                          <div class="text-danger" *ngIf="address.errors && (address.touched || form.submitted)">
+                            <span [hidden]="!address.errors.required">Please Enter Address</span>
+                          </div>
+                        </div>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td> <label class="form-check-label text-right h5 text-danger" for="gridCheck">
+                          <i class="fa fa-address-book-o" aria-hidden="true"></i>
+                          Terms and Conditons
+                        </label></td>
+                      <td>
+                        <div class="custom-control custom-checkbox text-left">
+                          <input type="checkbox" name="terms" #terms="ngModel" [(ngModel)]="user.terms"
+                            class="btn-primary custom-control-input" name="emergency" ref="emergency" id="emergency"
+                            required />
+                          <div class="text-danger" *ngIf="terms.errors && (terms.touched || form.submitted)">
+                            <span [hidden]="!terms.errors.required">Please accept the terms</span>
+                          </div>
+                          <label class="custom-control-label " for="emergency">
+                            Check if you Agree to
+                            <a href="#" class="text-primary border-bottom border-primary">Terms and
+                              Conditons</a></label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="submit" class="btn btn-primary form-control" id="submit" name="submit"
+                            value="Save Changes" required />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+            <div class="col-12 col-md-3 col-sm-3 col-xl-3 col-lg-3 display-2 text-dark">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

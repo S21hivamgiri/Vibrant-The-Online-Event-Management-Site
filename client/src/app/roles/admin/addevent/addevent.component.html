@@ -1,0 +1,317 @@
+<div class="container">
+  <div class="jumbotron my-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <br />
+          <div class="row">
+            <div class="col-12 col-md-2 col-sm-0 col-xl-2 col-lg-2 display-2 text-dark">
+            </div>
+            <div class="col-12 col-md-8 col-sm-12 col-xl-8 col-lg-8 text-right border border-primary">
+              <div class="border-top border-primary "></div>
+              <div class="h2 col-12 my-4 text-center alert alert-primary">
+                <i class="fa fa-pencil" aria-hidden="true"></i> Add New Event
+              </div>
+              <form method action class="text-right" #form="ngForm" (ngSubmit)="SaveData(form)">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Sponsors:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <ng-multiselect-dropdown [placeholder]="'Enter Sponsor Details'" [data]="sponsorList"
+                          [settings]="dropdownSettings" (onSelect)="onSponsorSelect($event)"
+                          (onDeSelect)="onSponsorDeSelect($event)" (onSelectAll)="onSponsorSelectAll($event)"
+                          (onDeSelectAll)="onSponsorDeSelectAll()">
+                        </ng-multiselect-dropdown>
+                        <a [routerLink]="['/admin/addsponsor']">
+                          <button class="event-btn btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                            Add New Sponsor
+                          </button>
+                        </a>
+                        <div class="text-danger" *ngIf="!selectedSponsors.length &&  form.submitted">
+                          <span [hidden]="selectedSponsors.length">Add a Sponsor</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-microphone" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Speakers:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <ng-multiselect-dropdown [placeholder]="'Enter Speaker Details'" [data]="speakerList"
+                          [settings]="dropdownSettings" (onSelect)="onSpeakerSelect($event)"
+                          (onDeSelect)="onSpeakerDeSelect($event)" (onSelectAll)="onSpeakerSelectAll($event)"
+                          (onDeSelectAll)="onSpeakerDeSelectAll()">
+                        </ng-multiselect-dropdown>
+                        <a [routerLink]="['/admin/addspeaker']">
+                          <button class="event-btn btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                            Add New Speaker
+                          </button>
+                        </a>
+                        <div class="text-danger" *ngIf="!selectedSpeaker.length &&  form.submitted">
+                          <span [hidden]="selectedSpeaker.length">Add a Speaker</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-header" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Event Name:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" id="title" ref='title' name="title" #title="ngModel"
+                            [(ngModel)]="professional.title" class="form-control border border-primary rounded"
+                            placeholder="Enter Event Title" required />
+                          <div class="text-danger" *ngIf="title.errors && (title.touched || form.submitted)">
+                            <span [hidden]="!title.errors.required">Please Enter Name</span>
+                            <span [hidden]="!title.errors.minlength">Title should be atleast 3 characters long</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Registration Starting Date/ Time in GMT:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="datetime-local" id="regisDate" ref='regisDate' name="regisDate"
+                            #regisDate="ngModel" [(ngModel)]="professional.regisDate"
+                            class="form-control border border-primary rounded"
+                            placeholder="Enter Registration Start Date" required />
+                          <button class="event-btn btn btn-primary" (click)="setRegisTime($event)">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            Start Registration On Posting
+                          </button>
+                          <div class="text-danger" *ngIf="regisDate.errors && (regisDate.touched || form.submitted)">
+                            <span [hidden]="!regisDate.errors.required">Please Enter Registration Starting Date</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td [class]="regisOnEventStart?'alert alert-warning':''" class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Registration Ending Date/ Time in GMT:
+                          <div class="text-danger text-left h6" *ngIf="regisOnEventStart">
+                            <i class="fa fa-link" aria-hidden="true"></i>
+                            Linked to Event StartDate
+                          </div>
+                        </label>
+                      </td>
+                      <td [class]="regisOnEventStart?'alert alert-warning':''">
+                        <div class="form-group">
+                          <input type="datetime-local" id="regisEndDate" ref='regisEndDate' name="regisEndDate"
+                            #regisEndDate="ngModel" [(ngModel)]="professional.regisCloseDate"
+                            class="form-control border border-primary rounded"
+                            placeholder="Enter Registration Ending Date" required />
+                          <button class="event-btn btn btn-primary" *ngIf="!regisOnEventStart"
+                            (click)="setRegisEndTime($event)">
+                            <i class="fa fa-link" aria-hidden="true"></i>
+                            End Registration On Event Day
+                          </button>
+                          <button class="event-btn btn btn-primary" *ngIf="regisOnEventStart"
+                            (click)="regisOnEventStart=!regisOnEventStart">
+                            <i class="fa fa-chain-broken" aria-hidden="true"></i>
+                            Unlink Event Day
+                          </button>
+                          <div class="text-danger"
+                            *ngIf="regisEndDate.errors && (regisEndDate.touched || form.submitted)">
+                            <span [hidden]="!regisEndDate.errors.required">Please Enter Registration Ending Date</span>
+                          </div>
+                        </div>
+                        <div class="text-danger" *ngIf="professional.regisCloseDate && professional.regisDate">
+                          <span [hidden]="(professional.regisDate < professional.regisCloseDate)">
+                            Registration Closing Day must be greater than starting Day
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-dollar" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Event Price in $:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="number" id="price" ref='price' name="price" #price="ngModel"
+                            [(ngModel)]="professional.price" class="form-control border border-primary rounded"
+                            placeholder="Enter Ticket Price" required />
+                          <div class="text-danger" *ngIf="price.errors && (price.touched || form.submitted)">
+                            <span [hidden]="!price.errors.required">Please Enter Event Price</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td [class]="regisOnEventStart?'alert alert-warning':''" class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Event Start Date/ Time in GMT:
+                        </label>
+                      </td>
+                      <td [class]="regisOnEventStart?'alert alert-warning':''">
+                        <div class="form-group">
+                          <input type="datetime-local" id="start" ref='start' name="start" #start="ngModel"
+                            [(ngModel)]="professional.start" class="form-control border border-primary rounded"
+                            placeholder="Enter Start date" (change)="setRegEndValue($event)" required />
+                          <div class="text-danger" *ngIf="start.errors && (start.touched || form.submitted)">
+                            <span [hidden]="!start.errors.required">Please Enter Event StartDate</span>
+                          </div>
+                          <div class="text-danger" *ngIf="professional.regisCloseDate && professional.start">
+                            <span [hidden]="(professional.regisCloseDate <= professional.start)">
+                              Event Starting Day must be greater than Equal to Registration Closing Day
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Event End Date/ Time in GMT:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <input type="datetime-local" id="end" ref='end' name="end" #end="ngModel"
+                            [(ngModel)]="professional.end" class="form-control border border-primary rounded"
+                            placeholder="Enter End date" required />
+                          <div class="text-danger" *ngIf="end.errors && (end.touched || form.submitted)">
+                            <span [hidden]="!end.errors.required">Please Enter End Date</span>
+                          </div>
+                          <div class="text-danger" *ngIf="professional.end && professional.start">
+                            <span [hidden]="(professional.start < professional.end)">
+                              Event Starting Time must be greater than Event Ending Day
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-cubes" aria-hidden="true"></i>
+                        <label class='ml-2'>Type:</label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <select name="type" id="type" #type="ngModel" [(ngModel)]="professional.type"
+                            class="form-control border border-primary rounded" required>
+                            <option value="Technical">Technical</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Process">Process</option>
+                            <option value="Education">Education</option>
+                            <option value="Awareness">Awareness</option>
+                            <option value="Motivation">Motivation</option>
+                            <option value="Business">Business</option>
+                            <option value="Social">Social</option>
+                            <option value="marketing">Marketing</option>
+                          </select>
+                        </div>
+                        <div class="text-danger" *ngIf="type.errors && (type.touched || form.submitted)">
+                          <span [hidden]="!type.errors.required">Please Enter Type of Event</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-address-book" aria-hidden="true"></i>
+                        <label class='ml-2'>
+                          Venue:
+                          <div class="text-danger text-left h6"></div>
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <textarea rows={3} id="venue" name="venue" #venue="ngModel" [(ngModel)]="professional.venue"
+                            class="form-control border border-primary rounded my-0" placeholder="Enter Address"
+                            required>
+                          </textarea>
+                          <div class="text-danger" *ngIf="venue.errors && (venue.touched || form.submitted)">
+                            <span [hidden]="!venue.errors.required">Please Enter Venue</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <i class="fa fa-book"></i><label class='ml-2'>
+                          Description:
+                          <div class="text-danger text-left h6"></div>
+
+                        </label>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <textarea rows={3} id="description" name="description" #description="ngModel"
+                            [(ngModel)]="professional.description"
+                            class="form-control border border-primary rounded my-0" placeholder="Enter Description"
+                            required></textarea>
+                          <div class="text-danger"
+                            *ngIf="description.errors && (description.touched || form.submitted)">
+                            <span [hidden]="!description.errors.required">Please Enter Description</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="submit" class="btn btn-primary form-control" id="submit" name="submit"
+                            (click)="submitType='view'" value="Save & View Event" required />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="submit" class="btn btn-primary form-control" id="submit" name="submit"
+                            (click)="submitType='next'" value="Save & Add Next Event" required />
+                        </div>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </form>
+
+            </div>
+            <div class="col-12 col-md-2 col-sm-0 col-xl-2 col-lg-2 display-2 text-dark">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

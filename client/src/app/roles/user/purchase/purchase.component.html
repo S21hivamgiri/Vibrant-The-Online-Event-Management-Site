@@ -1,0 +1,50 @@
+<div class=" alert alert-primary">
+    <h1 class="display-3 text-center font-weight-bolder py-5"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+        {{user.name}}'s Purchases
+    </h1>
+</div>
+<div *ngIf='user.purchased.length; else noData'>
+    <div *ngFor="let purchase of user.purchased;let i=index" class="my-2 border-primary" style="border:8px solid">
+        <div class="alert alert-primary m-0">
+            <span class="badge badge-pill badge-primary">{{i+1}}</span>
+            <span class="font-weight-bold ml-2">Item purchased on {{getDate(purchase.time)}}</span>
+        </div>
+        <table class="table m-0">
+            <thead>
+                <tr class="bg-primary rounded text-white">
+                    <th>Event Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let hero of purchase.cart">
+                    <tr class="border-bottom border-primary py-4 my-4">
+                        <td class="h4">{{ hero.title }}</td>
+                        <td class="h4">${{ hero.price}}</td>
+                        <td class="h4">{{ hero.count}}</td>
+                        <td class="h4">${{ hero.count * hero.price}}</td>
+                        <td class="h4">
+                            <a style="cursor:pointer" title="Click Here"
+                                (click)="router.navigate(['user/events/'+hero.id])">
+                                <button class="btn btn-success my-2 my-sm-0" type="submit">
+                                    <i class="fa fa-joomla" aria-hidden="true"></i> View Event
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <div class="alert alert-warning m-0">
+            <span class="font-weight-bold ml-2"
+                [class.strike]='purchase.finalPrice!==purchase.totalPrice'>${{purchase.totalPrice}}</span>
+            <span class="font-weight-bold ml-2 text-danger"
+                *ngIf="purchase.finalPrice!==purchase.totalPrice">${{purchase.finalPrice}}</span>
+            <span class="font-weight-bold mx-5" *ngIf="purchase.code">Offer Used :{{purchase.code}} </span>
+        </div>
+    </div>
+</div>
+<ng-template #noData><span>You have not made any purchases till now.</span></ng-template>

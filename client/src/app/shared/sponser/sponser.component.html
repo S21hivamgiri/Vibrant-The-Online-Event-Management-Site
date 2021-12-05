@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="jumbotron py-0">
+    <div class="row" *ngIf="professional?.length;else noData">
+      <div class="col-12 py-3 " *ngFor="let item of professional">
+        <div class="card border-primary mb-3">
+          <div class="alert p-3 alert-primary font-weight-bold d-flex justify-content-between"
+            style="text-transform: uppercase;">
+            <span style="font-size:30px">
+              <span class="mr-2">
+                <i class="fa fa-id-badge" aria-hidden="true"></i>
+              </span>
+              <span class="name" style="font-size:30px">{{item.name}}</span>
+            </span>
+            <a *ngIf="item.weblink" target='_blank' [href]="item.weblink">VISIT
+              <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="card-body text-primary" *ngIf=" item.email">
+            <h5 class="card-title"><span class="mr-2"><i class="fa fa-comment" aria-hidden="true"></i></span><a
+                href="mailto:{{item.email}}">{{item.email}}</a></h5>
+            <div class="text-center">
+            </div>
+            <p class="card-text" style="color:black"><span class="mr-2">
+                <i class="fa fa-joomla" aria-hidden="true"></i></span>{{item.description}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noData>No Offer to Show At the moment</ng-template>
+  </div>
+</div>

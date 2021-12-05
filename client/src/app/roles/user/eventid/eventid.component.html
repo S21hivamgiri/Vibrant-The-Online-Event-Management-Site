@@ -1,0 +1,69 @@
+<div class=" alert alert-primary" *ngIf="event">
+  <h1 class="display-3 text-center font-weight-bolder py-5">{{event.title}}</h1>
+  <div class="my-2 border-bottom border-primary text-primary text-right">A conference organoised by Vibrant on
+    {{event.type}}
+  </div>
+  <div class="row">
+    <div class="col-12 text-center ">
+      <ul class="list-group mb-0 px-5">
+        <div
+          *ngIf="eventService.GetStatus(event.cancel, event.regisDate,event.regisCloseDate,event.start, event.end)| async as status">
+          <div *ngIf='status[0]' [class]="'font-weight-bold alert alert-'+status[1]+' border border-'+status[1]">
+            <span *ngIf='status[0]==="Posted and Tentative"'>
+              {{status[0]}}<br>
+              <i class="fa fa-ticket" aria-hidden="true"></i> Purchase ticket After<br>
+              {{event.regisDate | date:'dd:MM:yyyy HH:mm'}}
+            </span>
+            <span *ngIf='status[0]==="Registration Started"'>
+              {{status[0]}}<br>
+              <i class="fa fa-ticket" aria-hidden="true"></i> Purchase ticket before<br>
+              {{event.regisCloseDate| date:'dd:MM:yyyy HH:mm ZZZZ' }}
+            </span>
+            <span *ngIf='status[0]==="Registration Closed"'>
+              <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+              {{status[0]}}
+            </span>
+          </div>
+        </div>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0 ">Start Time: <span
+            class="h5">
+            {{event.start | date:'dd:MM:yyyy HH:mm ZZZZ'}}</span> </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0 ">Ends Time: <span
+            class="h5">
+            {{event.end | date:'dd:MM:yyyy HH:mm ZZZZ'}}</span>
+        </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0">Venue: <span class="h5">
+            {{event.venue}}</span>
+        </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0">Free Lunch and Snacks
+        </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0">3 hrs interaction with
+          Speaker
+        </li>
+        <li class="list-group-item bg-transparent border-primary border-left-0 border-right-0">
+          $ {{event.price}}
+        </li>
+      </ul>
+      <div *ngIf="isCartDisplayed(event.regisDate, event.regisCloseDate)">
+        <button class="btn btn-warning my-2 my-sm-0" (click)="addToCart()" type="submit"
+          *ngIf="eventInCart(event._id); else alreadyInCart;">
+          <i class="fa fa-cart-plus" aria-hidden="true"></i>
+          Add to cart
+        </button>
+        <ng-template #alreadyInCart>
+          <span class="text-center text-primary">Item Already in cart</span>
+        </ng-template>
+      </div>
+      <div class=" font-weight-bold border-top border-bottom border-primary">
+        <div class="my-2 h5"> {{event.description}}</div>
+      </div>
+    </div>
+    <div class="alert alert-primary font-weight-bold" *ngIf="event.speakers.length">Speaker List</div>
+    <ul class="list-group" *ngIf="event.speakers.length">
+      <li class="" *ngFor="let hero of event.speakers">{{hero.name}}</li>
+    </ul>
+    <div class="alert alert-primary font-weight-bold" *ngIf="event.sponsors.length">Sponsor List</div>
+    <ul class="list-group" *ngIf="event.sponsors.length">
+      <li class="" *ngFor="let hero of event.sponsors">{{hero.name}}</li>
+    </ul>
+  </div>

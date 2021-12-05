@@ -1,0 +1,9 @@
+.event-btn {
+    border-radius: 8px 8px 8px 30px;
+    font-size: small;
+}
+
+.strike {
+    text-decoration: line-through;
+    text-decoration-color: brown;
+}

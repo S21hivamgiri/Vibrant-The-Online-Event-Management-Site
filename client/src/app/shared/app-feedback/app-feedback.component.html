@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-3 col-sm-3 col-xl-3 col-lg-3"></div>
+    <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6">
+      <div class="alert text-center jumbotron my-0 alert-dismissible fade show" role="alert">
+        <div class="h1 dispaly-6 text-primary">
+          FeedBack
+        </div>
+        <ng-container *ngIf="!isFeedBackGiven;else registered">
+          <div class="display-5"><strong class=" text-primary">Feedback!</strong>
+            You should check in on some of those fields below.
+            <br />Your FeedBack is Essential to Make our Product better.<br />
+            <span class='text-secondary h4'>Present Rating:<span
+                class="font-weight-bolder">({{average}}/5)</span></span>
+          </div>
+          <br />
+          <div>
+            <div class="alert alert-primary mx-5">
+              Please rate Our Experiance:
+              <div class="h4 font-weight-bolder">
+                <div class="d-flex" style="justify-content: space-evenly;">
+                  <ng-container *ngFor="let i of [1,2,3,4,5]">
+                    <span [class.text-primary]="i<=rating" style="cursor:pointer" (click)="rating=i">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                  </ng-container>
+                </div>
+                <span class="px-5"><span class='text-primary h6'>Present Rating:(
+                    <span class="font-weight-bolder" style="font-size:big">{{rating}}/5</span>)</span></span>
+                <div>
+                  <span class="h5">Enter Your Commment:<span> <br /><textarea rows="4" cols="30" [(ngModel)]="feedback"
+                        name="feedback" class=" border border-primary rounded" placeholder="Enter Your Commment"
+                        required></textarea>
+                      <span class="text-danger h6"></span>
+                      <div>
+                        <div class="form-group">
+                          <input type="submit" class="btn btn-primary form-control" id="submit" name="submit"
+                            value="Send FeedBack" (click)="handlSubmit()" />
+                        </div>
+                      </div>
+                    </span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3 col-sm-3 col-xl-3 col-lg-3"></div>
+        </ng-container>
+        <ng-template #registered>
+          <span><br />Your FeedBack is Essential to Make our Product better.<br /></span>
+          <div class="display-5"><strong class=" text-primary">Thanks for Your Feedback!</strong></div>
+          <button class="btn btn-success my-2 my-sm-0" (click)="isFeedBackGiven=false" type="submit">
+            <i class="fa fa-vcard" aria-hidden="true"></i>
+            Give Feedback Again
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

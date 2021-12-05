@@ -1,0 +1,107 @@
+<div class="container">
+
+  <div class="jumbotron my-0">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-12">
+
+          <br />
+          <div class="row">
+            <div class="col-12 col-md-3 col-sm-3 col-xl-3 col-lg-3 display-2 text-dark">
+
+            </div>
+            <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6 text-right border border-primary">
+              <div class="border-top border-primary "></div>
+              <div class="h2 col-12 my-4 text-center alert alert-primary"><i class="fa fa-pencil"
+                  aria-hidden="true"></i> Enter new Offer</div>
+              <form method action class="text-right" #form="ngForm" (ngSubmit)="SaveData(form)">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5"> <label>
+                          Offercode:
+                          <div class="text-danger text-left h6"></div>
+                        </label></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="text" id="code" ref='code' name="code" #code="ngModel" [(ngModel)]="user.code"
+                            class="form-control border border-primary rounded" placeholder="Enter Coupon Code" />
+                          <div class="text-danger" *ngIf="code.errors && (code.touched || form.submitted)">
+                            <span [hidden]="!code.errors.required">Please Enter Name</span>
+                            <span [hidden]="!code.errors.minlength">Name should be atleast 3 characters long</span>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5">
+                        <label>Offer Type:</label>
+                        <div class="text-danger text-left h6"></div>
+                      </td>
+                      <td>
+                        <div class="form-group">
+                          <select name="type" id="type" #type="ngModel" [(ngModel)]="user.type"
+                            class="form-control border border-primary rounded">
+                            <option value="discount">Discount % </option>
+                            <option value="offprice">Price off in Rs.</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr *ngIf="user.type">
+                      <td class="text-left h5 text-dark ml-5 pl-5"> <label>
+                          CodeValue:
+                          <div class="text-danger text-left h6"></div>
+                        </label></td>
+                      <td>
+                        <div class="form-group" *ngIf="user.type == 'discount'">
+                          <input type="number" id="value" ref='value' name="value" #value="ngModel"
+                            [(ngModel)]="user.value" class="form-control border border-primary rounded"
+                            placeholder="Enter Discount" min="1" max="100" />
+                        </div>
+                        <div class="form-group" *ngIf="user.type == 'offprice'">
+                          <input type="number" id="value" ref='value' name="value" #value="ngModel"
+                            [(ngModel)]="user.value" class="form-control border border-primary rounded"
+                            placeholder="Enter Off Price" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-left h5 text-dark ml-5 pl-5"> <label>
+                          Description:
+                          <div class="text-danger text-left h6"></div>
+
+                        </label></td>
+                      <td>
+                        <div class="form-group">
+
+                          <textarea rows={3} id="description" name="description" #description="ngModel"
+                            [(ngModel)]="user.description" class="form-control border border-primary rounded my-0"
+                            placeholder="Enter Description" required></textarea>
+                        </div>
+                      </td>
+
+                    </tr>
+                    <tr>
+
+                      <td></td>
+                      <td>
+                        <div class="form-group">
+                          <input type="submit" class="btn btn-primary form-control" id="submit" name="submit"
+                            value="Save Changes" required />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+            <div class="col-12 col-md-3 col-sm-3 col-xl-3 col-lg-3 display-2 text-dark">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class=" alert alert-primary">
+  <h1 class="display-3 text-center font-weight-bolder py-5">
+    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+    {{user.name}}'s Cart
+  </h1>
+  <div class='d-flex text-center mb-4' style="justify-content: center;">
+    <button class="event-btn btn-lg btn-primary" [routerLink]="['/user/event']">
+      <i class="fa fa-envira" aria-hidden="true"></i>
+      {{user.cart.length?'View Other Events':'View Events'}}
+    </button>
+  </div>
+  <div class="row" *ngIf="user.cart.length;else noData">
+    <div class="text-primary font-weight-bold alert col-12 col-md-6 col-xl-6 col-lg-6 col-sm-6">
+      Do you have a Coupon Code:
+    </div>
+    <div class="text-primary text-right font-weight-bold alert col-12 col-md-3 col-xl-3 col-lg-3 col-sm-3">
+      <div style='display:flex; align-content:center; flex-direction: column;'>
+        <input class="form-control mr-sm-2" type="text" id="name" placeholder="Enter Coupon" aria-label="Fetch"
+          [(ngModel)]="offer" (keyup)='onChange()'>
+        <button class="event-btn btn btn-primary" [routerLink]="['/user/offer']">
+          <i class="fa fa-print" aria-hidden="true"></i>
+          View Offer Code
+        </button>
+      </div>
+    </div>
+    <div class="text-primary font-weight-bold  col-12 col-md-3 col-xl-3 col-lg-3 col-sm-3">
+      <div style='display:flex; align-content:center; flex-direction: column;'>
+        <button class="btn btn-outline-primary m-2 my-sm-0" type="submit" *ngIf="offer" (click)='getOffer()'>
+          <i class="fa fa-fort-awesome" aria-hidden="true"></i>
+          Apply Code
+        </button>
+        <span *ngIf="errorMessage && offer" class='text-danger'>{{errorMessage}}</span>
+        <span *ngIf="successMessage && offer" class='text-success'>{{successMessage}}</span>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr class="bg-primary rounded text-white">
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hero of user.cart; let i= index" class="border-bottom border-primary py-4 my-4">
+          <td class="h4">{{ hero.title }}</td>
+          <td class="h4">${{ hero.price}}</td>
+          <td class="h4">
+            <button class="btn btn-alert my-2 my-sm-0" (click)="hero.count=hero.count+1;upDateCart()">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+            {{hero.count}}
+            <button class="btn btn-alert my-2 my-sm-0" (click)="hero.count<=0||hero.count=hero.count-1;upDateCart()">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </button>
+          </td>
+          <td class="h4">${{ hero.count * hero.price}}</td>
+          <td class="h4"><a style="cursor:pointer" title="Click Here"
+              (click)="router.navigate(['user/events/'+hero.id])">
+              <button class="btn btn-success my-2 my-sm-0" type="submit">
+                <i class="fa fa-joomla" aria-hidden="true"></i> View Event
+              </button>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row  alert alert-warning w-100">
+      <div class="col-12 col-md-6 col-xl-6 col-lg-6 col-sm-6 d-flex">
+        <span class="font-weight-bold">Total Price:</span>
+        <span class="font-weight-bold ml-2" [class.strike]='finalPrice'>${{total}}</span>
+        <span class="font-weight-bold ml-2 text-danger" *ngIf='finalPrice'>${{finalPrice}}</span>
+      </div>
+      <div class="col-12 col-md-3 col-xl-3 col-lg-3 col-sm-3 d-flex">
+      </div>
+      <div class="col-12 col-md-3 col-xl-3 col-lg-3 col-sm-3 d-flex">
+        <button class="btn btn-warning my-2 my-sm-0" (click)='purchase()' type="submit">
+          <i class="fa fa-fort-awesome" aria-hidden="true"></i>
+          Purchase Now
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-template #noData>
+    <div class='text-center'>No items to Display.</div>
+    <div class='text-center'>Come back sometime Later!!</div>
+  </ng-template>
+</div>
