@@ -12,15 +12,15 @@ export class AuthService {
     this.headers = new HttpHeaders({ 'content-type': 'application/json' });
   }
 
-  SignUp(user: User): Observable<HttpResponse<any>> {
+  signUp(user: User): Observable<HttpResponse<any>> {
     return this.client.post<User>(env.apiAddress + '/signup', JSON.stringify(user), { headers: this.headers, observe: 'response' });
   }
 
-  Login(user: User): Observable<HttpResponse<any>> {
+  login(user: User): Observable<HttpResponse<any>> {
     return this.client.post<User>(env.apiAddress + '/login', JSON.stringify(user), { headers: this.headers, observe: 'response' });
   }
 
-  IsLogin(): Observable<Boolean> {
+  isLoggedIn(): Observable<Boolean> {
     const data = sessionStorage.getItem('user');
     if (data !== undefined && data !== null) {
       return of(true)
@@ -36,7 +36,7 @@ export class AuthService {
     sessionStorage.setItem('role', data);
   }
 
-  IsRemembered(): Observable<Boolean> {
+  isRemembered(): Observable<Boolean> {
     const data = localStorage.getItem('user');
     if (data !== undefined && data !== null) {
       return of(true)
@@ -44,11 +44,11 @@ export class AuthService {
     return of(false);
   }
 
-  Logout() {
+  logout() {
     sessionStorage.removeItem('user');
   }
 
-  GetUserDetails(): Observable<User> {
+  getCurrentUserDetails(): Observable<User> {
     const data = localStorage.getItem('user');
     if (data !== undefined && data !== null) {
       const user: User = JSON.parse(data);

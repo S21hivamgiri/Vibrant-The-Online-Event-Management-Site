@@ -12,6 +12,8 @@ import { UserService } from '../services/user.service';
 })
 export class LoginComponent implements OnInit {
   user: User;
+  isSet = false;
+
   constructor(private authService: AuthService, private userService: UserService, private router: Router) {
     this.user = new User();
   }
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-  isSet = false
+
   Login(form: NgForm) {
     if (form.valid) {
       this.authService.Login(this.user).subscribe(res => {
@@ -38,13 +40,14 @@ export class LoginComponent implements OnInit {
             localStorage.removeItem('user');
           }
           sessionStorage.setItem("user", JSON.stringify(user));
+
           if (user.roles.indexOf("Admin") > -1) {
             this.router.navigate(["/admin"]);
             this.authService.setCurentRole('Admin')
           }
+          
           else if (user.roles.indexOf("User") > -1) {
             this.authService.setCurentRole('User');
-
             this.router.navigate(["/user"]);
           }
         }
